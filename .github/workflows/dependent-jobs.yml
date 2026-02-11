@@ -1,10 +1,11 @@
 ## YAML Template.
+# trigger run
 ---
 name: Workflow 1 - Dependent Jobs
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 jobs:
   build:
