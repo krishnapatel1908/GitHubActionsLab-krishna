@@ -1,0 +1,59 @@
+## YAML Template.
+---
+name: Workflow 2 - Multi-Platform Testing
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  ubuntu-job:
+    name: Ubuntu Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Print OS info
+        run: |
+          echo "Runner OS: $RUNNER_OS"
+          uname -a
+
+      - name: Create and display a file
+        run: |
+          echo "Hello from Ubuntu runner!" > os-output.txt
+          cat os-output.txt
+
+  windows-job:
+    name: Windows Job
+    runs-on: windows-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Print OS info
+        run: |
+          echo "Runner OS: $env:RUNNER_OS"
+          systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
+
+      - name: Create and display a file
+        run: |
+          "Hello from Windows runner!" | Out-File -FilePath os-output.txt
+          type os-output.txt
+
+  macos-job:
+    name: macOS Job
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Print OS info
+        run: |
+          echo "Runner OS: $RUNNER_OS"
+          uname -a
+
+      - name: Create and display a file
+        run: |
+          echo "Hello from macOS runner!" > os-output.txt
+          cat os-output.txt
